@@ -234,8 +234,9 @@ h1, h2, h3, h4 {
 /* Cards: dark backing so video letterbox gaps never show white */
 [data-framer-name="Logo & Title"]{background-color:#090401 !important}
 [data-framer-name="Logo & Title"] video,[data-framer-name="Logo & Title"] img{width:100% !important;height:100% !important;object-fit:cover !important;display:block !important}
-/* Footer Menus: titles and links share one alignment */
+/* Footer: titles+links share one left edge (width-safe: text-align + auto margins only) */
 [data-framer-name="Menu"] h6,[data-framer-name="Menu"] p{margin-top:0 !important;margin-bottom:0 !important;text-align:left !important}
+[data-framer-name="Footer"] [data-framer-name="Menu"]{margin-left:0 !important;margin-right:auto !important}
 /* Center all text on mobile + tablet only (desktop untouched) */
 @media (max-width: 1079.98px){
 p[dir="auto"],h1[dir="auto"],h2[dir="auto"],h3[dir="auto"],h4[dir="auto"],h5[dir="auto"],h6[dir="auto"]{text-align:center !important}
@@ -246,13 +247,17 @@ p[dir="auto"],h1[dir="auto"],h2[dir="auto"],h3[dir="auto"],h4[dir="auto"],h5[dir
 }
 /* Logo vectors: never pixelated (applies header + footer) */
 [data-framer-name="Logo"]{image-rendering:auto !important}
-/* Footer: everything left-aligned on all breakpoints (exception to mobile centering) */
-[data-framer-name="Footer"]{align-items:flex-start !important}
-[data-framer-name="Footer"] [data-framer-name="Menu"]{align-items:flex-start !important}
+/* Footer text left on all breakpoints (exception to mobile centering) */
 [data-framer-name="Footer"] h6[dir="auto"],[data-framer-name="Footer"] p[dir="auto"]{text-align:left !important;margin-left:0 !important;padding-left:0 !important}
-/* Footer menus row: start at gutter so columns share the logo's left edge (all breakpoints) */
-[data-framer-name="Footer"] div:has(> div > [data-framer-name="Menu"]){justify-content:flex-start !important;place-content:flex-start !important}
-[data-framer-name="Footer"] div:has(> [data-framer-name="Menu"]){align-items:flex-start !important;justify-content:flex-start !important}
+/* Tablet only: stop footer menu columns collapsing to letter-width (width-safe: content-sized, capped) */
+@media (min-width: 810px) and (max-width: 1079.98px){
+[data-framer-name="Footer"] [data-framer-name="Menu"],[data-framer-name="Footer"] [data-framer-name="Menu"] > div{width:max-content !important;max-width:100% !important}
+[data-framer-name="Footer"] div:has(> div > [data-framer-name="Menu"]){width:max-content !important;max-width:100% !important;margin-left:auto !important;margin-right:0 !important;gap:40px !important}
+}
+/* Desktop only: nav-link columns hug the far right of the footer */
+@media (min-width: 1080px){
+[data-framer-name="Footer"] div:has(> div > [data-framer-name="Menu"]){width:max-content !important;max-width:100% !important;margin-left:auto !important;margin-right:0 !important}
+}
 </style>
 </head>
 <body>
